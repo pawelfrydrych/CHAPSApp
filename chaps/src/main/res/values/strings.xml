@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">CHAPSApp</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_search">Search</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+    <string name="ladowanie">Ładowanie. Proszę czekać..</string>
+
+    <string name="koledy">→Kolędy</string>
+    <string name="muzykaludowa">→Muzyka ludowa</string>
+    <string name="muzykasakralna">→Muzyka sakralna</string>
+    <string name="muzykarozrywkowa">→Muzyka rozrywkowa</string>
+    <string name="muzykawspolczesna">→Muzyka współczesna</string>
+
+    <string name="nav_item_home">Ekran Startowy</string>
+    <string name="nav_item_devicelists">Lista Urządzeń</string>
+    <string name="nav_item_map">Mapa</string>
+    <string name="nav_item_logout">Wyloguj</string>
+    <string name="map_dialog_location">Pierwsze użycie aplikacji wymaga połączenia internetowego</string>
+    <string name="close_back_button_alert">Czy na pewno chcesz zamknąć aplikację?</string>
+    <string name="wyjdz">Wyjdź</string>
+    <string name="nav_item_plan">Plan prób</string>
+    <string name="nav_item_nuty">Nuty</string>
+    <string name="nav_item_kontakt">Kontakt</string>
+    <string name="xml_error">Błąd pobierania planu</string>
+    <string name="connection_error">Błąd połączenia</string>
+    <string name="stowarzyszeniespiewacze"> Stowarzyszenie Śpiewacze
+        Chór Akademicki im. prof. Jana Szyrockiego Zachodniopomorskiego Uniwersytetu Technologicznego w Szczecinie </string>
+    <string name="kierownik">Dyrygent i Kierownik Artystyczny</string>
+    <string name="adres">Adres
+        70-497 Szczecin, ul. Wyspiańskiego 1
+        tel.: +48 (91) 423-8888 fax: +48 (91) 421-2188</string>
+
+    <!-- navigation drawer item labels  -->
+    <string-array name="nav_drawer_labels">
+        <item>@string/nav_item_plan</item>
+        <item>@string/nav_item_nuty</item>
+        <item>@string/nav_item_kontakt</item>
+    </string-array>
+
+
+    <string name="title_plan">Plan prob</string>
+    <string name="title_nuty">Nuty</string>
+    <string name="title_kontakt">Kontakt</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_authorization">AuthorizationActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+</resources>

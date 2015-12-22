@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:padding="10dp"
+              android:paddingLeft="10dp"
+              android:paddingRight="10dp" >
+
+    <!-- Name Label -->
+
+    <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/imageViewPtak"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="9dp"
+            />
+
+    <TextView
+            android:id="@+id/dzien"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="6dp"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="5dp"
+            android:paddingBottom="0dp"
+            android:alpha="0.8"
+            android:textColor="#ff272727"
+            android:textSize="15dp"
+            android:text="poniedzialek 04.01"
+             android:layout_toRightOf="@+id/imageViewPtak"
+            android:layout_toEndOf="@+id/imageViewPtak" android:textStyle="bold"/>
+
+    <TextView
+            android:id="@+id/godzina"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="6dp"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="0dp"
+            android:paddingBottom="0dp"
+            android:alpha="0.8"
+            android:textColor="#ff272727"
+            android:textSize="14dp"
+            android:text="19:00"
+            android:layout_below="@+id/dzien"
+            android:layout_toRightOf="@+id/imageViewPtak"
+            android:layout_toEndOf="@+id/imageViewPtak"
+            android:textStyle="italic"/>
+
+    <TextView
+            android:id="@+id/rodzaj"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="0dp"
+            android:paddingBottom="0dp"
+            android:alpha="0.8"
+            android:textColor="#ff272727"
+            android:textSize="14dp"
+            android:text="razem"
+            android:layout_below="@+id/godzina"
+            android:layout_toRightOf="@+id/imageViewPtak"
+            android:layout_toEndOf="@+id/imageViewPtak" android:paddingLeft="6dp"/>
+
+    <TextView
+            android:id="@+id/program"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="6dp"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:alpha="0.8"
+            android:textColor="#ff272727"
+            android:textSize="14dp"
+            android:text="koledy"
+            android:layout_below="@+id/rodzaj"
+            android:layout_toRightOf="@+id/imageViewPtak"
+            android:layout_toEndOf="@+id/imageViewPtak"
+            android:paddingBottom="0dp"/>
+        <TextView
+                android:id="@+id/uwagi"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="6dp"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingBottom="0dp"
+                android:alpha="0.8"
+                android:textColor="#ff272727"
+                android:textSize="14dp"
+                android:text="CHAPS"
+                android:layout_below="@+id/program"
+                android:layout_toRightOf="@+id/imageViewPtak"
+                android:layout_toEndOf="@+id/imageViewPtak"
+                />
+
+</RelativeLayout>

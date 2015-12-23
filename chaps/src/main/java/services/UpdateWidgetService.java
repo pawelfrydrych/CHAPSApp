@@ -42,6 +42,7 @@ public class UpdateWidgetService extends Service {
 
         RemoteViews view = new RemoteViews(getPackageName(), R.layout.mywidgetlayout);
 
+
         String data = nastepnaProba(obj.listaDat);
         for(int i = 0; i < obj.probaList.size(); i++)
         {
@@ -59,6 +60,8 @@ public class UpdateWidgetService extends Service {
         // Push update for this widget to the home screen
         ComponentName thisWidget = new ComponentName(this, WidgetActivity.class);
         AppWidgetManager manager = AppWidgetManager.getInstance(this);
+
+
         manager.updateAppWidget(thisWidget, view);
     }
 

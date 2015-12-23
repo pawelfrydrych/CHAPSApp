@@ -23,6 +23,7 @@ public class WidgetActivity extends AppWidgetProvider {
 
     }
 
+
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
@@ -44,6 +45,8 @@ public class WidgetActivity extends AppWidgetProvider {
         }
 
         m.setRepeating(AlarmManager.RTC_WAKEUP, TIME.getTime().getTime(), AlarmManager.INTERVAL_DAY, service);
+
+
 
     }
 }

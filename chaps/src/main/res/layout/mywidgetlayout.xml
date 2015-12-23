@@ -32,7 +32,7 @@
             android:id="@+id/imageViewPtak"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="9dp"
-            android:src="@drawable/ic_launcher"/>
+            android:src="@drawable/ic_launcher" android:clickable="false"/>
 
     <TextView
             android:id="@+id/dzien"

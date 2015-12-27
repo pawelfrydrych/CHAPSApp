@@ -17,14 +17,13 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
-import model.Nuty;
+import handler.XMLHandlerNuty;
 import pl.pawelfrydrych.CHAPS.R;
 
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 
 /**
@@ -33,11 +32,13 @@ import java.util.HashMap;
 public class SakralneFragment extends ListFragment {
 
     public static final int DIALOG_DOWNLOAD_PROGRESS = 0;
-    Nuty nuty;
+
     private ArrayList<String> listaUtworow;
     private ProgressDialog mProgressDialog;
     public String nazwa;
     public boolean done;
+    XMLHandlerNuty handlerNuty;
+
 
 
     @Override
@@ -52,21 +53,24 @@ public class SakralneFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        nuty = new Nuty();
         ArrayList<HashMap<String, String>> resultList = new ArrayList<HashMap<String, String>>();
 
-        listaUtworow = new ArrayList<String>();
-        for(String key : nuty.sakralne.keySet())
-        {
-            listaUtworow.add(key);
-        }
+        handlerNuty = new XMLHandlerNuty();
 
-        Collections.sort(listaUtworow);
+        handlerNuty.fetchXML("sakralna.xml");
 
-        for(int i = 0; i < nuty.sakralne.size(); i++)
+
+        for(int i = 0; i < handlerNuty.nutyList.size(); i++)
         {
             HashMap<String,String> map = new HashMap<String, String>();
-            map.put("textViewNuty", listaUtworow.get(i));
+
+            if(handlerNuty.nutyList.get(i).getAut().equals(""))
+            {
+                map.put("textViewNuty", handlerNuty.nutyList.get(i).getTit());
+            }else
+            {
+                map.put("textViewNuty", handlerNuty.nutyList.get(i).getTit() + " - " +handlerNuty.nutyList.get(i).getAut() );
+            }
 
             resultList.add(map);
 
@@ -87,14 +91,12 @@ public class SakralneFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
-        // Log.d("debug", nuty.utwory.get(listaUtworow.get(position)) );
-        nazwa = listaUtworow.get(position);
-        startDownload(listaUtworow.get(position),nuty.sakralne.get(listaUtworow.get(position)));
-
+        nazwa = handlerNuty.nutyList.get(position).getFil();
+        startDownload(handlerNuty.nutyList.get(position).getFil(), "http://chaps.zut.edu.pl/Nuty/chapsapp/sakralna/"+ handlerNuty.nutyList.get(position).getFil() );
     }
     public void getScore(String nazwa) {
         Log.d("debug", "nazwa; " + nazwa);
-        File file = new File(Environment.getExternalStorageDirectory().getPath() + "/CHAPSApp/" + nazwa + ".pdf");
+        File file = new File(Environment.getExternalStorageDirectory().getPath() + "/CHAPSApp/" + nazwa);
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setDataAndType(Uri.fromFile(file), "application/pdf");
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
@@ -121,10 +123,11 @@ public class SakralneFragment extends ListFragment {
     }
 
     public void startDownload(String nazwa, String link) {
-        if (new File(Environment.getExternalStorageDirectory().getPath() + "/CHAPSApp/" + nazwa + ".pdf").exists()) {
+        if (new File(Environment.getExternalStorageDirectory().getPath() + "/CHAPSApp/" + nazwa).exists()) {
             getScore(nazwa);
             return;
         }
+        Log.d("debug","link: " + link);
         new DownloadAndOpenPDF().execute(new String[]{link});
     }
 
@@ -152,11 +155,12 @@ public class SakralneFragment extends ListFragment {
         protected String doInBackground(String... strings) {
             try {
                 URL url = new URL(strings[0]);
+                Log.d("debug","string[0]: " + strings[0]);
                 URLConnection connection = url.openConnection();
                 connection.connect();
                 int lenghtOfFile = connection.getContentLength();
                 InputStream input = new BufferedInputStream(url.openStream());
-                OutputStream output = new FileOutputStream(Environment.getExternalStorageDirectory().getPath() + "/CHAPSApp/" + nazwa + ".pdf");
+                OutputStream output = new FileOutputStream(Environment.getExternalStorageDirectory().getPath() + "/CHAPSApp/" + nazwa );
                 byte[] data = new byte[4096];
                 long total = 0;
                 while (true) {

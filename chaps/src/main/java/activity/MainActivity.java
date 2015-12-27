@@ -1,7 +1,10 @@
 package activity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,10 +13,16 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 import pl.pawelfrydrych.CHAPS.R;
+
+import java.io.IOException;
 
 
 public class MainActivity extends ActionBarActivity implements FragmentDrawer.FragmentDrawerListener {
@@ -47,9 +56,20 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout),mToolbar);
         drawerFragment.setDrawerListener(this);
 
-
         displayView(0);
 
+        if(checkConnectivity(getApplicationContext()) != false)
+        {
+            Thread thread = new Thread()
+            {
+                @Override
+                public void run() {
+                    sendHttpRequest();
+                }
+            };
+
+            thread.start();
+        }
     }
 
 
@@ -169,5 +189,47 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 
 
 
+    public void sendHttpRequest()
+    {
+        String urlKoledy = "http://chaps.zut.edu.pl/Nuty/chapsapp/koledy/koledy.php";
+        String urlLudowa = "http://chaps.zut.edu.pl/Nuty/chapsapp/ludowa/ludowa.php";
+        String urlRozrywkowa = "http://chaps.zut.edu.pl/Nuty/chapsapp/rozrywkowa/rozrywkowa.php";
+        String urlSakralna = "http://chaps.zut.edu.pl/Nuty/chapsapp/sakralna/sakralna.php";
+        String urlWspolczesna = "http://chaps.zut.edu.pl/Nuty/chapsapp/wspolczesna/wspolczesna.php";
+        HttpClient client = new DefaultHttpClient();
+
+        try{
+            client.execute(new HttpGet(urlKoledy));
+            client.execute(new HttpGet(urlLudowa));
+            client.execute(new HttpGet(urlRozrywkowa));
+            client.execute(new HttpGet(urlSakralna));
+            client.execute(new HttpGet(urlWspolczesna));
+
+        }catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+
+    public boolean checkConnectivity(Context context) {
+        try {
+            ConnectivityManager connect = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo wifiNetwork = connect.getNetworkInfo(1);
+            NetworkInfo MOBILEnetwork = connect.getNetworkInfo(0);
+            NetworkInfo activeNetwork = connect.getActiveNetworkInfo();
+            if (MOBILEnetwork != null && MOBILEnetwork.isConnected()) {
+                return true;
+            }
+            if (wifiNetwork == null || !wifiNetwork.isConnected()) {
+                return false;
+            }
+            return true;
+        } catch (Exception e) {
+            Log.d("debug", "network error");
+            Log.d("debug", "Mobile network and Wifi network isn't works.");
+            return false;
+        }
+    }
 
 }

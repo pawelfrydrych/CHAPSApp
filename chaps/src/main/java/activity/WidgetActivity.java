@@ -17,9 +17,11 @@ public class WidgetActivity extends AppWidgetProvider {
     public static final String ACTION_AUTO_UPDATE = "AUTO_UPDATE";
     private PendingIntent service = null;
 
+
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
+
 
     }
 
@@ -49,4 +51,5 @@ public class WidgetActivity extends AppWidgetProvider {
 
 
     }
+
 }

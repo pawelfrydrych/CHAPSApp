@@ -19,7 +19,7 @@ import java.util.ArrayList;
 /**
  * Created by Pawe³ on 2015-12-18.
  */
-public class XMLHandler {
+public class XMLHandlerListaProb {
 
     public ArrayList<Proba> probaList = new ArrayList<Proba>();
     public ArrayList<String> listaDat = new ArrayList<String>();

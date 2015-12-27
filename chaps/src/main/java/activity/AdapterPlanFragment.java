@@ -22,7 +22,7 @@ import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
-import handler.XMLHandler;
+import handler.XMLHandlerListaProb;
 import model.Kalendarz;
 import pl.pawelfrydrych.CHAPS.R;
 
@@ -36,7 +36,7 @@ import java.util.HashMap;
 
 public class AdapterPlanFragment extends ListFragment{
 
-    private XMLHandler obj;
+    private XMLHandlerListaProb obj;
     private ArrayList<HashMap<String,String>> resultList;
     public AdapterPlanFragment()
     {}
@@ -120,10 +120,10 @@ public class AdapterPlanFragment extends ListFragment{
 
 
 
-    public void DownloadFiles(){
+    public void DownloadFiles(String ur, String nazwa){
 
         try {
-            URL url = new URL("http://chaps.zut.edu.pl/portal/xml/proby.xml");
+            URL url = new URL(ur);
             URLConnection conexion = url.openConnection();
             conexion.connect();
             int lenghtOfFile = conexion.getContentLength();
@@ -132,7 +132,7 @@ public class AdapterPlanFragment extends ListFragment{
             if (!testDirectory.exists()) {
                 testDirectory.mkdir();
             }
-            FileOutputStream fos = new FileOutputStream(testDirectory + "/plan.xml");
+            FileOutputStream fos = new FileOutputStream(testDirectory + "/" + nazwa);
             byte data[] = new byte[1024];
             int count = 0;
             long total = 0;
@@ -187,9 +187,14 @@ public class AdapterPlanFragment extends ListFragment{
 
         @Override
         protected String doInBackground(String... strings) {
-            DownloadFiles();
+            DownloadFiles("http://chaps.zut.edu.pl/portal/xml/proby.xml","plan.xml");
+            DownloadFiles("http://chaps.zut.edu.pl/Nuty/chapsapp/koledy/koledy.xml","koledy.xml");
+            DownloadFiles("http://chaps.zut.edu.pl/Nuty/chapsapp/ludowa/ludowa.xml","ludowa.xml");
+            DownloadFiles("http://chaps.zut.edu.pl/Nuty/chapsapp/rozrywkowa/rozrywkowa.xml","rozrywkowa.xml");
+            DownloadFiles("http://chaps.zut.edu.pl/Nuty/chapsapp/sakralna/sakralna.xml","sakralna.xml");
+            DownloadFiles("http://chaps.zut.edu.pl/Nuty/chapsapp/wspolczesna/wspolczesna.xml","wspolczesna.xml");
 
-            obj = new XMLHandler();
+            obj = new XMLHandlerListaProb();
             obj.fetchXML();
 
             getActivity().runOnUiThread(new Runnable() {

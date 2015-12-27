@@ -1,15 +1,17 @@
 package services;
 
 import activity.WidgetActivity;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.widget.RemoteViews;
-import handler.XMLHandler;
+import handler.XMLHandlerListaProb;
 import org.joda.time.DateTime;
 import pl.pawelfrydrych.CHAPS.R;
 
@@ -20,7 +22,6 @@ import java.util.Date;
  * Created by Pawe³ on 2015-12-20.
  */
 public class UpdateWidgetService extends Service {
-
 
     @Override
     public void onCreate() {
@@ -35,7 +36,7 @@ public class UpdateWidgetService extends Service {
 
     private void buildUpdate() {
 
-        XMLHandler obj = new XMLHandler();
+        XMLHandlerListaProb obj = new XMLHandlerListaProb();
         obj.fetchXML();
 
         String lastUpdated = DateFormat.format("MMMM dd, yyyy h:mmaa", new Date()).toString();
@@ -61,8 +62,13 @@ public class UpdateWidgetService extends Service {
         ComponentName thisWidget = new ComponentName(this, WidgetActivity.class);
         AppWidgetManager manager = AppWidgetManager.getInstance(this);
 
-
         manager.updateAppWidget(thisWidget, view);
+    }
+
+    protected PendingIntent getPendingSelfIntent(Context context, String action) {
+        Intent intent = new Intent(context, getClass());
+        intent.setAction(action);
+        return PendingIntent.getBroadcast(context, 0, intent, 0);
     }
 
     @Override

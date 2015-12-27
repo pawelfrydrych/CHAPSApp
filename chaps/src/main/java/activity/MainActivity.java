@@ -17,6 +17,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import handler.XMLHandlerListaProb;
+import model.TotalCalendar;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -85,6 +87,26 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+
+            XMLHandlerListaProb xmlHandlerListaProb = new XMLHandlerListaProb();
+            xmlHandlerListaProb.fetchXML();
+
+            TotalCalendar calendar = new TotalCalendar(getApplicationContext());
+
+            for(int i = 0; i < xmlHandlerListaProb.probaList.size(); i++ )
+            {
+                String dzien = xmlHandlerListaProb.probaList.get(i).getData().substring(0,2);
+                String miesiac = xmlHandlerListaProb.probaList.get(i).getData().substring(3,5);
+                String uwaga = xmlHandlerListaProb.probaList.get(i).getUwagi();
+                String program = xmlHandlerListaProb.probaList.get(i).getProgram();
+                String godzina = xmlHandlerListaProb.probaList.get(i).getGodzina();
+
+                calendar.insert(dzien,miesiac,uwaga,"CHAPS",program,godzina);
+            }
+
+
+
+
             return true;
         }
 
@@ -161,9 +183,6 @@ public class MainActivity extends ActionBarActivity implements FragmentDrawer.Fr
 
 
     }
-
-
-
 
 
     public void showAlertDialogOnBackClose()

@@ -20,8 +20,8 @@ android {
         applicationId "pl.pawelfrydrych.CHAPSApp"
         minSdkVersion 9
         targetSdkVersion 21
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.01"
     }
 
     compileOptions {
@@ -42,6 +42,5 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:21.0.3'
     compile 'com.google.android.gms:play-services:8.1.0'
     compile 'joda-time:joda-time:2.9.1'
-
 
 }

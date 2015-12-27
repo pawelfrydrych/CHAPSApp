@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import model.Nuty;
+import model.KategorieNut;
 import pl.pawelfrydrych.CHAPS.R;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ import java.util.HashMap;
 public class PodzialNutFragment extends ListFragment {
 
     public static final int DIALOG_DOWNLOAD_PROGRESS = 0;
-    Nuty nuty;
+    KategorieNut kategorieNut;
     private ArrayList<String> listaKategorii;
     private ProgressDialog mProgressDialog;
     public String nazwa;
@@ -46,11 +46,11 @@ public class PodzialNutFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        nuty = new Nuty();
+        kategorieNut = new KategorieNut();
         ArrayList<HashMap<String, String>> resultList = new ArrayList<HashMap<String, String>>();
 
         listaKategorii = new ArrayList<String>();
-        for(String key : nuty.kategorie.keySet())
+        for(String key : kategorieNut.kategorie.keySet())
         {
             listaKategorii.add(key);
         }
@@ -58,7 +58,7 @@ public class PodzialNutFragment extends ListFragment {
 
         Collections.sort(listaKategorii);
 
-        for(int i = 0; i < nuty.kategorie.size(); i++)
+        for(int i = 0; i < kategorieNut.kategorie.size(); i++)
         {
             HashMap<String,String> map = new HashMap<String, String>();
             map.put("textViewNuty", listaKategorii.get(i));

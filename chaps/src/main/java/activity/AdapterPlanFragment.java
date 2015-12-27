@@ -23,7 +23,7 @@ import android.widget.ListAdapter;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import handler.XMLHandlerListaProb;
-import model.Kalendarz;
+import model.SingleCalendarEvent;
 import pl.pawelfrydrych.CHAPS.R;
 
 import java.io.*;
@@ -86,7 +86,7 @@ public class AdapterPlanFragment extends ListFragment{
                     Toast.makeText(getActivity(), "Kalendarz wymaga nowszej wersji Androida.", Toast.LENGTH_LONG).show();
 
                 } else {
-                    Kalendarz calendar = new Kalendarz(getActivity());
+                    SingleCalendarEvent calendar = new SingleCalendarEvent(getActivity());
 
                     String dzien = obj.probaList.get(i).getData().substring(0,2);
                     String miesiac = obj.probaList.get(i).getData().substring(3,5);

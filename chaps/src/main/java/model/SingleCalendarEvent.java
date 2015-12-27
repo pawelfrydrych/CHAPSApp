@@ -6,11 +6,11 @@ import android.provider.CalendarContract.Events;
 import android.util.Log;
 import java.util.Calendar;
 
-public class Kalendarz {
+public class SingleCalendarEvent {
     Context mContext;
     Intent mIntent;
 
-    public Kalendarz(Context context) {
+    public SingleCalendarEvent(Context context) {
         this.mContext = context;
     }
 

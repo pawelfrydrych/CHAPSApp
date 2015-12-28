@@ -20,8 +20,8 @@ android {
         applicationId "pl.pawelfrydrych.CHAPSApp"
         minSdkVersion 9
         targetSdkVersion 21
-        versionCode 4
-        versionName "1.03"
+        versionCode 7
+        versionName "1.06"
     }
 
     compileOptions {

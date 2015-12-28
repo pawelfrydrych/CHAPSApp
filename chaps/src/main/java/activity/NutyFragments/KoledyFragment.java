@@ -21,13 +21,14 @@ import handler.XMLHandlerNuty;
 import pl.pawelfrydrych.CHAPS.R;
 
 import java.io.*;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Created by Pawe³ on 2015-12-19.
+ * Created by Paweï¿½ on 2015-12-19.
  */
 public class KoledyFragment extends ListFragment {
 
@@ -156,12 +157,21 @@ public class KoledyFragment extends ListFragment {
         @Override
         protected String doInBackground(String... strings) {
             try {
+
+                URI uri = new URI(strings[0]);
+                String request = uri.toASCIIString();
+                strings[0] = request;
+
+                Log.d("debug","request "+request);
+
                 URL url = new URL(strings[0]);
+
                 Log.d("debug","string[0]: " + strings[0]);
                 URLConnection connection = url.openConnection();
                 connection.connect();
                 int lenghtOfFile = connection.getContentLength();
                 InputStream input = new BufferedInputStream(url.openStream());
+
                 OutputStream output = new FileOutputStream(Environment.getExternalStorageDirectory().getPath() + "/CHAPSApp/" + nazwa );
                 byte[] data = new byte[4096];
                 long total = 0;

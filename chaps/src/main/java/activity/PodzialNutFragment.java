@@ -22,7 +22,7 @@ import java.util.Collections;
 import java.util.HashMap;
 
 /**
- * Created by Pawe≥ on 2015-12-19.
+ * Created by Pawe≈Ç on 2015-12-19.
  */
 public class PodzialNutFragment extends ListFragment {
 

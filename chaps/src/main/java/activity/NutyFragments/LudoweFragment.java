@@ -21,13 +21,14 @@ import handler.XMLHandlerNuty;
 import pl.pawelfrydrych.CHAPS.R;
 
 import java.io.*;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Created by Pawe≥ on 2015-12-19.
+ * Created by Pawe≈Ç on 2015-12-19.
  */
 public class LudoweFragment extends ListFragment {
 
@@ -154,7 +155,14 @@ public class LudoweFragment extends ListFragment {
         @Override
         protected String doInBackground(String... strings) {
             try {
+                URI uri = new URI(strings[0]);
+                String request = uri.toASCIIString();
+                strings[0] = request;
+
+                Log.d("debug","request "+request);
+
                 URL url = new URL(strings[0]);
+
                 Log.d("debug","string[0]: " + strings[0]);
                 URLConnection connection = url.openConnection();
                 connection.connect();

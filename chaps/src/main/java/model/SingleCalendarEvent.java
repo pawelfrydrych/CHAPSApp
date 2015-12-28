@@ -18,8 +18,20 @@ public class SingleCalendarEvent {
         this.mIntent = new Intent("android.intent.action.INSERT");
         this.mIntent.setData(Events.CONTENT_URI);
         int year = Calendar.getInstance().get(Calendar.YEAR);
+        int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
         Calendar beginTime = Calendar.getInstance();
         Calendar endTime = Calendar.getInstance();
+
+        if((Miesiac(miesiac) == 0) && (currentMonth == 11)  )
+        {
+            year++;
+        }
+
+
+        Log.d("debug","Miesiac(miesiac) " + Miesiac(miesiac));
+        Log.d("debug","currentMonth " + currentMonth );
+        Log.d("debug","year " + year);
+
         beginTime.set(year, Miesiac(miesiac), Integer.valueOf(dzien).intValue(), Integer.valueOf(getHH1(godziny)).intValue(), Integer.valueOf(getMM1(godziny)).intValue());
         endTime.set(year, Miesiac(miesiac), Integer.valueOf(dzien).intValue(), Integer.valueOf(getHH2(godziny)).intValue(), Integer.valueOf(getMM2(godziny)).intValue());
         Log.d("debug", "Begin time: " + Miesiac(miesiac) + " " + Integer.valueOf(dzien));

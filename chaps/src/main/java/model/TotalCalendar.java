@@ -21,6 +21,13 @@ public class TotalCalendar {
         int year = Calendar.getInstance().get(Calendar.YEAR);
         Calendar beginTime = Calendar.getInstance();
         Calendar endTime = Calendar.getInstance();
+        int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
+
+        if((Miesiac(miesiac) == 0) && (currentMonth == 11)  )
+        {
+            year++;
+        }
+
         beginTime.set(year, Miesiac(miesiac), Integer.valueOf(dzien).intValue(), Integer.valueOf(getHH1(godziny)).intValue(), Integer.valueOf(getMM1(godziny)).intValue());
         endTime.set(year, Miesiac(miesiac), Integer.valueOf(dzien).intValue(), Integer.valueOf(getHH2(godziny)).intValue(), Integer.valueOf(getMM2(godziny)).intValue());
         Log.d("debug", "Begin time: " + Miesiac(miesiac) + " " + Integer.valueOf(dzien));

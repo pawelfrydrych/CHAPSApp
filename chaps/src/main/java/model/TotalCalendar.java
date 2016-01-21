@@ -28,8 +28,30 @@ public class TotalCalendar {
             year++;
         }
 
-        beginTime.set(year, Miesiac(miesiac), Integer.valueOf(dzien).intValue(), Integer.valueOf(getHH1(godziny)).intValue(), Integer.valueOf(getMM1(godziny)).intValue());
-        endTime.set(year, Miesiac(miesiac), Integer.valueOf(dzien).intValue(), Integer.valueOf(getHH2(godziny)).intValue(), Integer.valueOf(getMM2(godziny)).intValue());
+        int hh1 = 0;
+        int mm1 = 0;
+        int hh2 = 0;
+        int mm2 = 0;
+
+        if(isNumeric(getHH1(godziny)) && isNumeric(getMM2(godziny)))
+        {
+            Log.d("debug","numeric");
+            hh1 = Integer.valueOf(getHH1(godziny)).intValue();
+            mm1 = Integer.valueOf(getMM1(godziny)).intValue();
+            hh2 = Integer.valueOf(getHH2(godziny)).intValue();
+            mm2 = Integer.valueOf(getMM2(godziny)).intValue();
+        }
+        else
+        {
+            Log.d("debug","else");
+            hh1 = 0;
+            mm1 = 0;
+            hh2 = 0;
+            mm2 = 0;
+        }
+
+        beginTime.set(year, Miesiac(miesiac), Integer.valueOf(dzien).intValue(), hh1, mm1);
+        endTime.set(year, Miesiac(miesiac), Integer.valueOf(dzien).intValue(), hh2, mm2);
         Log.d("debug", "Begin time: " + Miesiac(miesiac) + " " + Integer.valueOf(dzien));
 
         long startMillis = beginTime.getTimeInMillis();
@@ -56,6 +78,7 @@ public class TotalCalendar {
         this.mIntent = new Intent(Intent.ACTION_VIEW).setData(builder.build());
         mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mContext.startActivity(mIntent);
+
 
         return true;
     }
@@ -99,6 +122,21 @@ public class TotalCalendar {
         }
         return 0;
     }
+
+
+    public static boolean isNumeric(String str)
+    {
+        try
+        {
+            double d = Double.parseDouble(str);
+        }
+        catch(NumberFormatException nfe)
+        {
+            return false;
+        }
+        return true;
+    }
+
 
     public String getHH1(String wejscie) {
         String hh1 = "0";

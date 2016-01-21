@@ -3,7 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.1.1'
+        classpath 'com.android.tools.build:gradle:1.2.3'
     }
 }
 apply plugin: 'com.android.application'
@@ -20,8 +20,8 @@ android {
         applicationId "pl.pawelfrydrych.CHAPSApp"
         minSdkVersion 9
         targetSdkVersion 21
-        versionCode 7
-        versionName "1.06"
+        versionCode 9
+        versionName "1.08"
     }
 
     compileOptions {

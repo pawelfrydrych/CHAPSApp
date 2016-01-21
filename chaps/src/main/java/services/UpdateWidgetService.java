@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * Created by Pawe³ on 2015-12-20.
+ * Created by Paweï¿½ on 2015-12-20.
  */
 public class UpdateWidgetService extends Service {
 
@@ -105,10 +105,20 @@ public class UpdateWidgetService extends Service {
                         if(tab2[1] > 0 && tab2[1] < 10)
                         {
                             wynik = "0"+tab2[0] + ".0" + tab2[1];
+                            Log.d("debug","wynik1: " + wynik);
                         }
                     }else
                     {
-                        wynik = tab2[0] + "." + tab2[1];
+                        if(tab2[1] > 0 && tab2[1] < 10)
+                        {
+                            wynik = tab2[0] + ".0" + tab2[1];
+                    //        Log.d("debug","wynik2: " + wynik);
+                        }
+                        else
+                        {
+                            wynik = tab2[0] + "." + tab2[1];
+                        }
+
                     }
                     break;
                 }

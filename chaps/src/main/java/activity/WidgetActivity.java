@@ -11,7 +11,7 @@ import services.UpdateWidgetService;
 import java.util.Calendar;
 
 /**
- * Created by Pawe³ on 2015-12-20.
+ * Created by Paweï¿½ on 2015-12-20.
  */
 public class WidgetActivity extends AppWidgetProvider {
     public static final String ACTION_AUTO_UPDATE = "AUTO_UPDATE";
